@@ -67,9 +67,20 @@ public class CRUDDepartment<T> extends AbstractCRUD<T> {
 	}
 
 	@Override
-	public ArrayList<T> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<T> listAll() throws SQLException {
+		String query = "SELECT * FROM department";
+        PreparedStatement stmt = super.connection.prepareStatement(query);
+        ResultSet result = stmt.executeQuery();
+        ArrayList<Department> departments = new ArrayList<Department>();
+        while(result.next()) {
+            Department dep = new Department();
+            dep.setIdDepartment(result.getInt(1));
+            dep.setNameDepartment(result.getString(2));
+            dep.setBuildingDepartment(result.getString(3));
+            dep.setBudgetDepartment(result.getDouble(4));
+            departments.add(dep);
+        }
+        return (ArrayList<T>) departments;
 	}
 
 }

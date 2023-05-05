@@ -68,9 +68,21 @@ public class CRUDStudents<T> extends AbstractCRUD<T> {
 	}
 
 	@Override
-	public ArrayList<T> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<T> listAll() throws SQLException {
+		String query = "SELECT * FROM department";
+        PreparedStatement stmt = super.connection.prepareStatement(query);
+        ResultSet result = stmt.executeQuery();
+        ArrayList<Students> students = new ArrayList<Students>();
+        while(result.next()) {
+            Students std = new Students();
+            std.setIdStudent(result.getInt(1));
+            std.setFirst_name(result.getString(2));
+            std.setDept_id(result.getInt(3));
+            std.setTot_cred(result.getString(4));
+            students.add(std);
+        }
+        return (ArrayList<T>) students;
 	}
+
 
 }

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 public abstract class AbstractCRUD<T> {
 	
 	private final String URL = "jdbc:mysql://localhost/CLASSES";
@@ -33,7 +34,7 @@ public abstract class AbstractCRUD<T> {
 	public abstract boolean delete(int id) throws SQLException;
 	public abstract boolean update(T o) throws SQLException;
 	public abstract T getById(int id) throws SQLException;
-	public abstract ArrayList<T> listAll();
+	public abstract ArrayList<T> listAll() throws SQLException;
 	
 	
 }
